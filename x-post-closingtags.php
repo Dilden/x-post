@@ -41,18 +41,23 @@ add_action('admin_init', function() {
 add_action('transition_post_status', 'x_post_send', 10, 3);
 function x_post_send($new_status, $old_status, $post) {
   if('publish' === $new_status && 'publish' !== $old_status && $post->post_type === 'post') {
-    x_post_sendto_telegram(x_post_title_link($post));
-    //echo "<pre>";
-    //var_dump(x_post_sendto_telegram(x_post_title_link($post)));
-    //echo "</pre>";
+    x_post_sendto_telegram(x_post_format($post));
   }
 }
 
-function x_post_title_link($post) {
-  remove_filter( 'the_content', 'wpautop' );
-  return '<b>' . get_the_title($post) . '</b>
+function x_post_format($post) {
+  $message = get_the_title($post);
+
+  if(has_excerpt($post)) {
+    $message .= ' 
+
+' . get_the_excerpt($post);
+  }
+  $message .= '
 
 <a href="'. get_permalink($post).'">'. get_permalink($post) .'</a>';
+
+  return $message;
 }
 
 
