@@ -1,6 +1,7 @@
 <?php
-  //settings_fields( 'x_post_options');
-  //$options = get_option('x_post_telegram');
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if(isset($_POST['x_post_telegram_msg_txt'])) {
   if(x_post_sendto_telegram($_POST['x_post_telegram_msg_txt'])) {
@@ -12,7 +13,6 @@ if(isset($_POST['x_post_telegram_msg_txt'])) {
     <p>Whoops! There was an error.</p>
     </div>';
   }
-
 }
 
 ?>

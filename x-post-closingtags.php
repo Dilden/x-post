@@ -13,6 +13,9 @@
  *
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 add_action( 'plugins_loaded', function(){
     load_plugin_textdomain( 'x-post-closingtags' );
@@ -38,15 +41,18 @@ add_action('admin_init', function() {
 add_action('transition_post_status', 'x_post_send', 10, 3);
 function x_post_send($new_status, $old_status, $post) {
   if('publish' === $new_status && 'publish' !== $old_status && $post->post_type === 'post') {
-    x_post_sendto_telegram(x_post_get_title_url($post));
+    x_post_sendto_telegram(x_post_title_link($post));
+    //echo "<pre>";
+    //var_dump(x_post_sendto_telegram(x_post_title_link($post)));
+    //echo "</pre>";
   }
 }
 
-function x_post_get_title_url($post) {
-  return get_the_title($post) . 
-    "
+function x_post_title_link($post) {
+  remove_filter( 'the_content', 'wpautop' );
+  return '<b>' . get_the_title($post) . '</b>
 
-    <a href='". get_post_permalink($post)."'>". get_post_permalink($post) ."</a>";
+<a href="'. get_permalink($post).'">'. get_permalink($post) .'</a>';
 }
 
 

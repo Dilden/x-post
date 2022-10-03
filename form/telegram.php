@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
   settings_fields( 'x_post_options');
   $options = get_option('x_post_telegram');
 ?>
