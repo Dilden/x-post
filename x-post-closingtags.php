@@ -3,7 +3,7 @@
  * Plugin Name:       X-Post
  * Plugin URI:        https://www.closingtags.com/
  * Description:       Send published posts to various social media platforms
- * Version:           1.0
+ * Version:           1.1
  * Author:            Dylan Hildenbrand
  * Author URI:        https://www.closingtags.com/
  * License:           GPL v2 or later
